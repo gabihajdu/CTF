@@ -1,4 +1,4 @@
-Neeeettmon Ip:10.10.10.152
+Netmon Ip:10.10.10.152
 
 rustscan:
 PORT      STATE SERVICE      REASON
