@@ -1,0 +1,47 @@
+ip:10.129.191.80
+
+rustscan:
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+
+nmap:
+PORT   STATE SERVICE REASON  VERSION
+80/tcp open  http    syn-ack Apache httpd 2.4.38 ((Debian))
+|_http-favicon: Unknown favicon MD5: 7D4140C76BF7648531683BFA4F7F8C22
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.38 (Debian)
+|_http-title: Login
+
+
+
+
+What does the acronym SQL stand for?
+structured query language
+What is one of the most common type of SQL vulnerabilities?
+sql injection
+What does PII stand for?
+Personally identifiable information
+What does the OWASP Top 10 list name the classification for this vulnerability?
+A03:2021-Injection
+What service and version are running on port 80 of the target?
+Apache httpd 2.4.38 ((Debian))
+What is the standard port used for the HTTPS protocol?
+443
+What is one luck-based method of exploiting login pages?
+brute-forcing
+What is a folder called in web-application terminology?
+directory
+What response code is given for "Not Found" errors?
+404
+What switch do we use with Gobuster to specify we're looking to discover directories, and not subdomains?
+dir
+What symbol do we use to comment out parts of the code?
+#
+Submit root flag
+e3d0796d002a446c0e622226f42e9672
+
+READ FLAG
+
+username: admin' 
+password: or '1'='1
