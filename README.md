@@ -1,2 +1,2 @@
 # CTF
-Here you can find the writeups of different CTF challenges from HTB
+Here you can find the writeups of different CTF challenges from HackTheBox.
