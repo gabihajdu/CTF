@@ -1,0 +1,536 @@
+Outdated IP:10.10.11.175
+
+
+
+rustscan:
+
+Open 10.10.11.175:139
+Open 10.10.11.175:25
+Open 10.10.11.175:53
+Open 10.10.11.175:88
+Open 10.10.11.175:135
+Open 10.10.11.175:445
+Open 10.10.11.175:464
+Open 10.10.11.175:389
+Open 10.10.11.175:593
+Open 10.10.11.175:636
+Open 10.10.11.175:3268
+Open 10.10.11.175:3269
+Open 10.10.11.175:5985
+Open 10.10.11.175:8530
+Open 10.10.11.175:9389
+Open 10.10.11.175:49667
+Open 10.10.11.175:49685
+Open 10.10.11.175:49686
+Open 10.10.11.175:49689
+Open 10.10.11.175:49914
+Open 10.10.11.175:49930
+
+
+
+
+
+nmap:
+PORT      STATE SERVICE       REASON  VERSION
+25/tcp    open  smtp          syn-ack hMailServer smtpd
+| smtp-commands: mail.outdated.htb, SIZE 20480000, AUTH LOGIN, HELP, 
+|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY 
+53/tcp    open  domain        syn-ack Simple DNS Plus
+88/tcp    open  kerberos-sec  syn-ack Microsoft Windows Kerberos (server time: 2023-03-29 20:49:47Z)
+135/tcp   open  msrpc         syn-ack Microsoft Windows RPC
+139/tcp   open  netbios-ssn   syn-ack Microsoft Windows netbios-ssn
+389/tcp   open  ldap          syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC.outdated.htb, DNS:outdated.htb, DNS:OUTDATED
+| Issuer: commonName=outdated-DC-CA/domainComponent=outdated
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-06-18T05:50:24
+| Not valid after:  2024-06-18T06:00:24
+| MD5:   ddf3 d13d 3a6a 3fa0 1dee 8321 6784 83dc
+| SHA-1: 7544 3aee ffbc 2ea7 bf61 1380 0a6c 16f1 cd07 afce
+| -----BEGIN CERTIFICATE-----
+| MIIFpDCCBIygAwIBAgITHQAAAAO0Hc53pH72GAAAAAAAAzANBgkqhkiG9w0BAQsF
+| ADBIMRMwEQYKCZImiZPyLGQBGRYDaHRiMRgwFgYKCZImiZPyLGQBGRYIb3V0ZGF0
+| ZWQxFzAVBgNVBAMTDm91dGRhdGVkLURDLUNBMB4XDTIyMDYxODA1NTAyNFoXDTI0
+| MDYxODA2MDAyNFowADCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALE6
+| oXztlMZYhET3e+DVQAJYB52HQHQnklGuIC5cIeoxbR4WiwfWXRhIpfNEo/1IXSs2
+| xk4jOJpYOklg4PwfdHxhrS06+wSto7MgSksULWwjm0b7llqixKxo3o+PgVYOgQtN
+| 7T6Mpxo153Q1gAVI0u6WpSYcSTBSMh//0anXX+2jPT5KNkoq7Ck3e4Nhjb44XFIT
+| KG1xC+EbiwbcMxhW6+ufGIu3bINYQudykPSS8zClFmFWH9KnBvrpNDYdFye+6iz6
+| AFMcjmzy1Ezwec/3pP1EutaZHf1pTCJ+ec7O3mISNQ19hPaI3pMcgGzpUEPvpWfj
+| HzPymRPVfGof6KGSjq0CAwEAAaOCAs0wggLJMDsGCSsGAQQBgjcVBwQuMCwGJCsG
+| AQQBgjcVCIT9zQLE9DP5hROD9rYjhd3sS0OD/9Y6hYyCKwIBZAIBAjAyBgNVHSUE
+| KzApBgcrBgEFAgMFBgorBgEEAYI3FAICBggrBgEFBQcDAQYIKwYBBQUHAwIwDgYD
+| VR0PAQH/BAQDAgWgMEAGCSsGAQQBgjcVCgQzMDEwCQYHKwYBBQIDBTAMBgorBgEE
+| AYI3FAICMAoGCCsGAQUFBwMBMAoGCCsGAQUFBwMCMB0GA1UdDgQWBBSsuFEFtUSl
+| l20qj0JnZQ99CDj4UDAfBgNVHSMEGDAWgBQqRfR/8VopV8PGTe6GJT0dbv5UtjCB
+| yAYDVR0fBIHAMIG9MIG6oIG3oIG0hoGxbGRhcDovLy9DTj1vdXRkYXRlZC1EQy1D
+| QSxDTj1EQyxDTj1DRFAsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2Vy
+| dmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1vdXRkYXRlZCxEQz1odGI/Y2VydGlm
+| aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1
+| dGlvblBvaW50MIHBBggrBgEFBQcBAQSBtDCBsTCBrgYIKwYBBQUHMAKGgaFsZGFw
+| Oi8vL0NOPW91dGRhdGVkLURDLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBT
+| ZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPW91dGRhdGVk
+| LERDPWh0Yj9jQUNlcnRpZmljYXRlP2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNh
+| dGlvbkF1dGhvcml0eTA1BgNVHREBAf8EKzApgg9EQy5vdXRkYXRlZC5odGKCDG91
+| dGRhdGVkLmh0YoIIT1VUREFURUQwDQYJKoZIhvcNAQELBQADggEBAA4fLq61cFEC
+| gv9/iMwPO02NC0SbPNHquvsIdEwkqEvx+hr6hfvmv3UTyQXgZQSIZDoaZWxR/47l
+| JDQjF45v9O0rYKvYKLh/tOpCaxY2cF1RcRJiO2Vbg/RtKB/dd022srF+u2nBuvO0
+| VgxHlsiP+tHvY8zX9JBVMMQLjx8Uf9yPkxO7rNwNHyeh5PKtcUrqNRQc8n0Pqg6K
+| Mc320ONyncAW7RPAdVd3zhLsHEzBtGtZgmc8QXKNsxdxbdmDbiCRQFsCKLku3m7M
+| vtnc2e0fgjcVmBmJqQVOdptMb7L80UtN8mYkjMkvdeCO2QrAoAir1J8osZo7TWpL
+| E2BaNXsDGeo=
+|_-----END CERTIFICATE-----
+|_ssl-date: 2023-03-29T20:51:17+00:00; +7h00m01s from scanner time.
+445/tcp   open  microsoft-ds? syn-ack
+464/tcp   open  kpasswd5?     syn-ack
+636/tcp   open  ssl/ldap      syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC.outdated.htb, DNS:outdated.htb, DNS:OUTDATED
+| Issuer: commonName=outdated-DC-CA/domainComponent=outdated
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-06-18T05:50:24
+| Not valid after:  2024-06-18T06:00:24
+| MD5:   ddf3 d13d 3a6a 3fa0 1dee 8321 6784 83dc
+| SHA-1: 7544 3aee ffbc 2ea7 bf61 1380 0a6c 16f1 cd07 afce
+| -----BEGIN CERTIFICATE-----
+| MIIFpDCCBIygAwIBAgITHQAAAAO0Hc53pH72GAAAAAAAAzANBgkqhkiG9w0BAQsF
+| ADBIMRMwEQYKCZImiZPyLGQBGRYDaHRiMRgwFgYKCZImiZPyLGQBGRYIb3V0ZGF0
+| ZWQxFzAVBgNVBAMTDm91dGRhdGVkLURDLUNBMB4XDTIyMDYxODA1NTAyNFoXDTI0
+| MDYxODA2MDAyNFowADCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALE6
+| oXztlMZYhET3e+DVQAJYB52HQHQnklGuIC5cIeoxbR4WiwfWXRhIpfNEo/1IXSs2
+| xk4jOJpYOklg4PwfdHxhrS06+wSto7MgSksULWwjm0b7llqixKxo3o+PgVYOgQtN
+| 7T6Mpxo153Q1gAVI0u6WpSYcSTBSMh//0anXX+2jPT5KNkoq7Ck3e4Nhjb44XFIT
+| KG1xC+EbiwbcMxhW6+ufGIu3bINYQudykPSS8zClFmFWH9KnBvrpNDYdFye+6iz6
+| AFMcjmzy1Ezwec/3pP1EutaZHf1pTCJ+ec7O3mISNQ19hPaI3pMcgGzpUEPvpWfj
+| HzPymRPVfGof6KGSjq0CAwEAAaOCAs0wggLJMDsGCSsGAQQBgjcVBwQuMCwGJCsG
+| AQQBgjcVCIT9zQLE9DP5hROD9rYjhd3sS0OD/9Y6hYyCKwIBZAIBAjAyBgNVHSUE
+| KzApBgcrBgEFAgMFBgorBgEEAYI3FAICBggrBgEFBQcDAQYIKwYBBQUHAwIwDgYD
+| VR0PAQH/BAQDAgWgMEAGCSsGAQQBgjcVCgQzMDEwCQYHKwYBBQIDBTAMBgorBgEE
+| AYI3FAICMAoGCCsGAQUFBwMBMAoGCCsGAQUFBwMCMB0GA1UdDgQWBBSsuFEFtUSl
+| l20qj0JnZQ99CDj4UDAfBgNVHSMEGDAWgBQqRfR/8VopV8PGTe6GJT0dbv5UtjCB
+| yAYDVR0fBIHAMIG9MIG6oIG3oIG0hoGxbGRhcDovLy9DTj1vdXRkYXRlZC1EQy1D
+| QSxDTj1EQyxDTj1DRFAsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2Vy
+| dmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1vdXRkYXRlZCxEQz1odGI/Y2VydGlm
+| aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1
+| dGlvblBvaW50MIHBBggrBgEFBQcBAQSBtDCBsTCBrgYIKwYBBQUHMAKGgaFsZGFw
+| Oi8vL0NOPW91dGRhdGVkLURDLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBT
+| ZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPW91dGRhdGVk
+| LERDPWh0Yj9jQUNlcnRpZmljYXRlP2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNh
+| dGlvbkF1dGhvcml0eTA1BgNVHREBAf8EKzApgg9EQy5vdXRkYXRlZC5odGKCDG91
+| dGRhdGVkLmh0YoIIT1VUREFURUQwDQYJKoZIhvcNAQELBQADggEBAA4fLq61cFEC
+| gv9/iMwPO02NC0SbPNHquvsIdEwkqEvx+hr6hfvmv3UTyQXgZQSIZDoaZWxR/47l
+| JDQjF45v9O0rYKvYKLh/tOpCaxY2cF1RcRJiO2Vbg/RtKB/dd022srF+u2nBuvO0
+| VgxHlsiP+tHvY8zX9JBVMMQLjx8Uf9yPkxO7rNwNHyeh5PKtcUrqNRQc8n0Pqg6K
+| Mc320ONyncAW7RPAdVd3zhLsHEzBtGtZgmc8QXKNsxdxbdmDbiCRQFsCKLku3m7M
+| vtnc2e0fgjcVmBmJqQVOdptMb7L80UtN8mYkjMkvdeCO2QrAoAir1J8osZo7TWpL
+| E2BaNXsDGeo=
+|_-----END CERTIFICATE-----
+|_ssl-date: 2023-03-29T20:51:18+00:00; +7h00m01s from scanner time.
+3268/tcp  open  ldap          syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC.outdated.htb, DNS:outdated.htb, DNS:OUTDATED
+| Issuer: commonName=outdated-DC-CA/domainComponent=outdated
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-06-18T05:50:24
+| Not valid after:  2024-06-18T06:00:24
+| MD5:   ddf3 d13d 3a6a 3fa0 1dee 8321 6784 83dc
+| SHA-1: 7544 3aee ffbc 2ea7 bf61 1380 0a6c 16f1 cd07 afce
+| -----BEGIN CERTIFICATE-----
+| MIIFpDCCBIygAwIBAgITHQAAAAO0Hc53pH72GAAAAAAAAzANBgkqhkiG9w0BAQsF
+| ADBIMRMwEQYKCZImiZPyLGQBGRYDaHRiMRgwFgYKCZImiZPyLGQBGRYIb3V0ZGF0
+| ZWQxFzAVBgNVBAMTDm91dGRhdGVkLURDLUNBMB4XDTIyMDYxODA1NTAyNFoXDTI0
+| MDYxODA2MDAyNFowADCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALE6
+| oXztlMZYhET3e+DVQAJYB52HQHQnklGuIC5cIeoxbR4WiwfWXRhIpfNEo/1IXSs2
+| xk4jOJpYOklg4PwfdHxhrS06+wSto7MgSksULWwjm0b7llqixKxo3o+PgVYOgQtN
+| 7T6Mpxo153Q1gAVI0u6WpSYcSTBSMh//0anXX+2jPT5KNkoq7Ck3e4Nhjb44XFIT
+| KG1xC+EbiwbcMxhW6+ufGIu3bINYQudykPSS8zClFmFWH9KnBvrpNDYdFye+6iz6
+| AFMcjmzy1Ezwec/3pP1EutaZHf1pTCJ+ec7O3mISNQ19hPaI3pMcgGzpUEPvpWfj
+| HzPymRPVfGof6KGSjq0CAwEAAaOCAs0wggLJMDsGCSsGAQQBgjcVBwQuMCwGJCsG
+| AQQBgjcVCIT9zQLE9DP5hROD9rYjhd3sS0OD/9Y6hYyCKwIBZAIBAjAyBgNVHSUE
+| KzApBgcrBgEFAgMFBgorBgEEAYI3FAICBggrBgEFBQcDAQYIKwYBBQUHAwIwDgYD
+| VR0PAQH/BAQDAgWgMEAGCSsGAQQBgjcVCgQzMDEwCQYHKwYBBQIDBTAMBgorBgEE
+| AYI3FAICMAoGCCsGAQUFBwMBMAoGCCsGAQUFBwMCMB0GA1UdDgQWBBSsuFEFtUSl
+| l20qj0JnZQ99CDj4UDAfBgNVHSMEGDAWgBQqRfR/8VopV8PGTe6GJT0dbv5UtjCB
+| yAYDVR0fBIHAMIG9MIG6oIG3oIG0hoGxbGRhcDovLy9DTj1vdXRkYXRlZC1EQy1D
+| QSxDTj1EQyxDTj1DRFAsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2Vy
+| dmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1vdXRkYXRlZCxEQz1odGI/Y2VydGlm
+| aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1
+| dGlvblBvaW50MIHBBggrBgEFBQcBAQSBtDCBsTCBrgYIKwYBBQUHMAKGgaFsZGFw
+| Oi8vL0NOPW91dGRhdGVkLURDLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBT
+| ZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPW91dGRhdGVk
+| LERDPWh0Yj9jQUNlcnRpZmljYXRlP2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNh
+| dGlvbkF1dGhvcml0eTA1BgNVHREBAf8EKzApgg9EQy5vdXRkYXRlZC5odGKCDG91
+| dGRhdGVkLmh0YoIIT1VUREFURUQwDQYJKoZIhvcNAQELBQADggEBAA4fLq61cFEC
+| gv9/iMwPO02NC0SbPNHquvsIdEwkqEvx+hr6hfvmv3UTyQXgZQSIZDoaZWxR/47l
+| JDQjF45v9O0rYKvYKLh/tOpCaxY2cF1RcRJiO2Vbg/RtKB/dd022srF+u2nBuvO0
+| VgxHlsiP+tHvY8zX9JBVMMQLjx8Uf9yPkxO7rNwNHyeh5PKtcUrqNRQc8n0Pqg6K
+| Mc320ONyncAW7RPAdVd3zhLsHEzBtGtZgmc8QXKNsxdxbdmDbiCRQFsCKLku3m7M
+| vtnc2e0fgjcVmBmJqQVOdptMb7L80UtN8mYkjMkvdeCO2QrAoAir1J8osZo7TWpL
+| E2BaNXsDGeo=
+|_-----END CERTIFICATE-----
+|_ssl-date: 2023-03-29T20:51:17+00:00; +7h00m01s from scanner time.
+3269/tcp  open  ssl/ldap      syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC.outdated.htb, DNS:outdated.htb, DNS:OUTDATED
+| Issuer: commonName=outdated-DC-CA/domainComponent=outdated
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-06-18T05:50:24
+| Not valid after:  2024-06-18T06:00:24
+| MD5:   ddf3 d13d 3a6a 3fa0 1dee 8321 6784 83dc
+| SHA-1: 7544 3aee ffbc 2ea7 bf61 1380 0a6c 16f1 cd07 afce
+| -----BEGIN CERTIFICATE-----
+| MIIFpDCCBIygAwIBAgITHQAAAAO0Hc53pH72GAAAAAAAAzANBgkqhkiG9w0BAQsF
+| ADBIMRMwEQYKCZImiZPyLGQBGRYDaHRiMRgwFgYKCZImiZPyLGQBGRYIb3V0ZGF0
+| ZWQxFzAVBgNVBAMTDm91dGRhdGVkLURDLUNBMB4XDTIyMDYxODA1NTAyNFoXDTI0
+| MDYxODA2MDAyNFowADCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALE6
+| oXztlMZYhET3e+DVQAJYB52HQHQnklGuIC5cIeoxbR4WiwfWXRhIpfNEo/1IXSs2
+| xk4jOJpYOklg4PwfdHxhrS06+wSto7MgSksULWwjm0b7llqixKxo3o+PgVYOgQtN
+| 7T6Mpxo153Q1gAVI0u6WpSYcSTBSMh//0anXX+2jPT5KNkoq7Ck3e4Nhjb44XFIT
+| KG1xC+EbiwbcMxhW6+ufGIu3bINYQudykPSS8zClFmFWH9KnBvrpNDYdFye+6iz6
+| AFMcjmzy1Ezwec/3pP1EutaZHf1pTCJ+ec7O3mISNQ19hPaI3pMcgGzpUEPvpWfj
+| HzPymRPVfGof6KGSjq0CAwEAAaOCAs0wggLJMDsGCSsGAQQBgjcVBwQuMCwGJCsG
+| AQQBgjcVCIT9zQLE9DP5hROD9rYjhd3sS0OD/9Y6hYyCKwIBZAIBAjAyBgNVHSUE
+| KzApBgcrBgEFAgMFBgorBgEEAYI3FAICBggrBgEFBQcDAQYIKwYBBQUHAwIwDgYD
+| VR0PAQH/BAQDAgWgMEAGCSsGAQQBgjcVCgQzMDEwCQYHKwYBBQIDBTAMBgorBgEE
+| AYI3FAICMAoGCCsGAQUFBwMBMAoGCCsGAQUFBwMCMB0GA1UdDgQWBBSsuFEFtUSl
+| l20qj0JnZQ99CDj4UDAfBgNVHSMEGDAWgBQqRfR/8VopV8PGTe6GJT0dbv5UtjCB
+| yAYDVR0fBIHAMIG9MIG6oIG3oIG0hoGxbGRhcDovLy9DTj1vdXRkYXRlZC1EQy1D
+| QSxDTj1EQyxDTj1DRFAsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2Vy
+| dmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1vdXRkYXRlZCxEQz1odGI/Y2VydGlm
+| aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1
+| dGlvblBvaW50MIHBBggrBgEFBQcBAQSBtDCBsTCBrgYIKwYBBQUHMAKGgaFsZGFw
+| Oi8vL0NOPW91dGRhdGVkLURDLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBT
+| ZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPW91dGRhdGVk
+| LERDPWh0Yj9jQUNlcnRpZmljYXRlP2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNh
+| dGlvbkF1dGhvcml0eTA1BgNVHREBAf8EKzApgg9EQy5vdXRkYXRlZC5odGKCDG91
+| dGRhdGVkLmh0YoIIT1VUREFURUQwDQYJKoZIhvcNAQELBQADggEBAA4fLq61cFEC
+| gv9/iMwPO02NC0SbPNHquvsIdEwkqEvx+hr6hfvmv3UTyQXgZQSIZDoaZWxR/47l
+| JDQjF45v9O0rYKvYKLh/tOpCaxY2cF1RcRJiO2Vbg/RtKB/dd022srF+u2nBuvO0
+| VgxHlsiP+tHvY8zX9JBVMMQLjx8Uf9yPkxO7rNwNHyeh5PKtcUrqNRQc8n0Pqg6K
+| Mc320ONyncAW7RPAdVd3zhLsHEzBtGtZgmc8QXKNsxdxbdmDbiCRQFsCKLku3m7M
+| vtnc2e0fgjcVmBmJqQVOdptMb7L80UtN8mYkjMkvdeCO2QrAoAir1J8osZo7TWpL
+| E2BaNXsDGeo=
+|_-----END CERTIFICATE-----
+|_ssl-date: 2023-03-29T20:51:18+00:00; +7h00m01s from scanner time.
+5985/tcp  open  http          syn-ack Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+8530/tcp  open  http          syn-ack Microsoft IIS httpd 10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Site doesn't have a title.
+9389/tcp  open  mc-nmf        syn-ack .NET Message Framing
+49667/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49685/tcp open  ncacn_http    syn-ack Microsoft Windows RPC over HTTP 1.0
+49686/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49689/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49914/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49930/tcp open  msrpc         syn-ack Microsoft Windows RPC
+Service Info: Hosts: mail.outdated.htb, DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 7h00m01s, deviation: 0s, median: 7h00m00s
+| p2p-conficker: 
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 38272/tcp): CLEAN (Timeout)
+|   Check 2 (port 51032/tcp): CLEAN (Timeout)
+|   Check 3 (port 54669/udp): CLEAN (Timeout)
+|   Check 4 (port 48887/udp): CLEAN (Timeout)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2023-03-29T20:50:38
+|_  start_date: N/A
+
+
+
+
+
+
+
+nmap with vuln script:
+
+PORT      STATE SERVICE       REASON  VERSION
+25/tcp    open  smtp          syn-ack hMailServer smtpd
+| smtp-vuln-cve2010-4344: 
+|_  The SMTP server is not Exim: NOT VULNERABLE
+|_sslv2-drown: 
+53/tcp    open  domain        syn-ack Simple DNS Plus
+88/tcp    open  kerberos-sec  syn-ack Microsoft Windows Kerberos (server time: 2023-03-29 20:53:16Z)
+135/tcp   open  msrpc         syn-ack Microsoft Windows RPC
+139/tcp   open  netbios-ssn   syn-ack Microsoft Windows netbios-ssn
+389/tcp   open  ldap          syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+|_sslv2-drown: 
+445/tcp   open  microsoft-ds? syn-ack
+464/tcp   open  kpasswd5?     syn-ack
+636/tcp   open  ssl/ldap      syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+|_sslv2-drown: 
+3268/tcp  open  ldap          syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+|_sslv2-drown: 
+3269/tcp  open  ssl/ldap      syn-ack Microsoft Windows Active Directory LDAP (Domain: outdated.htb0., Site: Default-First-Site-Name)
+|_sslv2-drown: 
+5985/tcp  open  http          syn-ack Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+|_http-jsonp-detection: Couldn't find any JSONP endpoints.
+|_http-litespeed-sourcecode-download: Request with null byte did not work. This web server might not be vulnerable
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+|_http-wordpress-users: [Error] Wordpress installation was not found. We couldn't find wp-login.php
+8530/tcp  open  http          syn-ack Microsoft IIS httpd 10.0
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+| http-enum: 
+|_  /inventory/: Potentially interesting folder
+|_http-jsonp-detection: Couldn't find any JSONP endpoints.
+|_http-litespeed-sourcecode-download: Request with null byte did not work. This web server might not be vulnerable
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+|_http-wordpress-users: [Error] Wordpress installation was not found. We couldn't find wp-login.php
+9389/tcp  open  mc-nmf        syn-ack .NET Message Framing
+49667/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49685/tcp open  ncacn_http    syn-ack Microsoft Windows RPC over HTTP 1.0
+49686/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49689/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49914/tcp open  msrpc         syn-ack Microsoft Windows RPC
+49930/tcp open  msrpc         syn-ack Microsoft Windows RPC
+Service Info: Hosts: mail.outdated.htb, DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_samba-vuln-cve-2012-1182: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR
+|_smb-vuln-ms10-054: false
+|_smb-vuln-ms10-061: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR
+
+
+
+
+
+
+enum4linux:
+
+ enum4linux -v 10.10.11.175
+[V] Dependent program "nmblookup" found in /usr/bin/nmblookup
+[V] Dependent program "net" found in /usr/bin/net
+[V] Dependent program "rpcclient" found in /usr/bin/rpcclient
+[V] Dependent program "smbclient" found in /usr/bin/smbclient
+[V] Dependent program "polenum" found in /usr/bin/polenum
+[V] Dependent program "ldapsearch" found in /usr/bin/ldapsearch
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Wed Mar 29 09:49:44 2023
+
+ ========================== 
+|    Target Information    |
+ ========================== 
+Target ........... 10.10.11.175
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ ==================================================== 
+|    Enumerating Workgroup/Domain on 10.10.11.175    |
+ ==================================================== 
+[V] Attempting to get domain name with command: nmblookup -A '10.10.11.175'
+[E] Can't find workgroup/domain
+
+
+ ============================================ 
+|    Nbtstat Information for 10.10.11.175    |
+ ============================================ 
+Looking up status of 10.10.11.175
+No reply from 10.10.11.175
+
+ ===================================== 
+|    Session Check on 10.10.11.175    |
+ ===================================== 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 437.
+[V] Attempting to make null session using command: smbclient -W '' //'10.10.11.175'/ipc$ -U''%'' -c 'help' 2>&1
+[+] Server 10.10.11.175 allows sessions using username '', password ''
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 451.
+[+] Got domain/workgroup name: 
+
+ =========================================== 
+|    Getting domain SID for 10.10.11.175    |
+ =========================================== 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 359.
+[V] Attempting to get domain SID with command: rpcclient -W '' -U''%'' 10.10.11.175 -c 'lsaquery' 2>&1
+Domain Name: OUTDATED
+Domain Sid: S-1-5-21-4089647348-67660539-4016542185
+[+] Host is part of a domain (not a workgroup)
+
+ ====================================== 
+|    OS information on 10.10.11.175    |
+ ====================================== 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 458.
+[V] Attempting to get OS info with command: smbclient -W '' //'10.10.11.175'/ipc$ -U''%'' -c 'q' 2>&1
+Use of uninitialized value $os_info in concatenation (.) or string at ./enum4linux.pl line 464.
+[+] Got OS info for 10.10.11.175 from smbclient: 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 467.
+[V] Attempting to get OS info with command: rpcclient -W '' -U''%'' -c 'srvinfo' '10.10.11.175' 2>&1
+[+] Got OS info for 10.10.11.175 from srvinfo:
+do_cmd: Could not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED
+
+ ============================= 
+|    Users on 10.10.11.175    |
+ ============================= 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 866.
+[V] Attempting to get userlist with command: rpcclient -W '' -c querydispinfo -U''%'' '10.10.11.175' 2>&1
+[E] Couldn't find users using querydispinfo: NT_STATUS_ACCESS_DENIED
+
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 881.
+[V] Attempting to get userlist with command: rpcclient -W '' -c enumdomusers -U''%'' '10.10.11.175' 2>&1
+[E] Couldn't find users using enumdomusers: NT_STATUS_ACCESS_DENIED
+
+ ========================================= 
+|    Share Enumeration on 10.10.11.175    |
+ ========================================= 
+[V] Attempting to get share list using authentication
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 640.
+do_connect: Connection to 10.10.11.175 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+Reconnecting with SMB1 for workgroup listing.
+Unable to connect with SMB1 -- no workgroup available
+
+[+] Attempting to map shares on 10.10.11.175
+
+ ==================================================== 
+|    Password Policy Information for 10.10.11.175    |
+ ==================================================== 
+[V] Attempting to get Password Policy info with command: polenum '':''@'10.10.11.175' 2>&1
+[E] Unexpected error from polenum:
+
+
+[+] Attaching to 10.10.11.175 using a NULL share
+
+[+] Trying protocol 139/SMB...
+
+        [!] Protocol failed: Cannot request session (Called Name:10.10.11.175)
+
+[+] Trying protocol 445/SMB...
+
+        [!] Protocol failed: SAMR SessionError: code: 0xc0000022 - STATUS_ACCESS_DENIED - {Access Denied} A process has requested access to an object but has not been granted those access rights.
+
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 501.
+[V] Attempting to get Password Policy info with command: rpcclient -W '' -U''%'' '10.10.11.175' -c "getdompwinfo" 2>&1
+
+[E] Failed to get password policy with rpcclient
+
+
+ ============================== 
+|    Groups on 10.10.11.175    |
+ ============================== 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 542.
+[V] Getting builtin groups with command: rpcclient -W '' -U''%'' '10.10.11.175' -c 'enumalsgroups builtin' 2>&1
+
+[+] Getting builtin groups:
+
+[+] Getting builtin group memberships:
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 542.
+[V] Getting local groups with command: rpcclient -W '' -U''%'' '10.10.11.175' -c 'enumalsgroups domain' 2>&1
+
+[+] Getting local groups:
+
+[+] Getting local group memberships:
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 593.
+[V] Getting domain groups with command: rpcclient -W '' -U''%'' '10.10.11.175' -c "enumdomgroups" 2>&1
+
+[+] Getting domain groups:
+
+[+] Getting domain group memberships:
+
+ ======================================================================= 
+|    Users on 10.10.11.175 via RID cycling (RIDS: 500-550,1000-1050)    |
+ ======================================================================= 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 710.
+[V] Attempting to get SID from 10.10.11.175 with command: rpcclient -W '' -U''%'' '10.10.11.175' -c 'lookupnames administrator' 2>&1
+[V] Assuming that user "administrator" exists
+[E] Couldn't get SID: NT_STATUS_ACCESS_DENIED.  RID cycling not possible.
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 742.
+[V] Attempting to get SIDs from 10.10.11.175 with command: rpcclient -W '' -U''%'' '10.10.11.175' -c lsaenumsid 2>&1
+
+ ============================================= 
+|    Getting printer info for 10.10.11.175    |
+ ============================================= 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 991.
+[V] Attempting to get printer info with command: rpcclient -W '' -U''%'' -c 'enumprinters' '10.10.11.175' 2>&1
+do_cmd: Could not initialise spoolss. Error was NT_STATUS_ACCESS_DENIED
+
+
+enum4linux complete on Wed Mar 29 09:50:14 2023
+
+
+
+
+
+
+SMB Enumeration:
+
+smbmap -H 10.10.11.175                                    
+[+] IP: 10.10.11.175:445        Name: 10.10.11.175                                      
+                                                                                                                                                                                                     
+┌──(kali㉿kali)-[~/Practice/HackTheBox/Outdated]
+└─$ smbclient -N -L //10.10.11.175//                         
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        IPC$            IPC       Remote IPC
+        NETLOGON        Disk      Logon server share 
+        Shares          Disk      
+        SYSVOL          Disk      Logon server share 
+        UpdateServicesPackages Disk      A network share to be used by client systems for collecting all software packages (usually applications) published on this WSUS system.
+        WsusContent     Disk      A network share to be used by Local Publishing to place published content on this WSUS system.
+        WSUSTemp        Disk      A network share used by Local Publishing from a Remote WSUS Console Instance.
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.175 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+
+Let's try to connect to Shares:
+
+smbclient -N  \\\\10.10.11.175\\Shares
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Mon Jun 20 11:01:33 2022
+  ..                                  D        0  Mon Jun 20 11:01:33 2022
+  NOC_Reminder.pdf                   AR   106977  Mon Jun 20 11:00:32 2022
+
+                9116415 blocks of size 4096. 1574092 blocks available
+smb: \> get NOC_Reminder.pdf 
+getting file \NOC_Reminder.pdf of size 106977 as NOC_Reminder.pdf (120.6 KiloBytes/sec) (average 120.6 KiloBytes/sec)
+smb: \> exit
+                                                                                                                                                                                                     
+┌──(kali㉿kali)-[~/Practice/HackTheBox/Outdated]
+└─$ ls 
+NOC_Reminder.pdf
+
+
+ATTENTION IT STAFF
+Due to last week’s security breach we need to rebuild some of our core servers. This has impacted a handful of our workstations, update
+services, monitoring tools and backups. As we work to rebuild, please assist our NOC by e-mailing a link to any internal web applications to
+itsupport@outdated.htb so we can get them added back into our monitoring platform for alerts and notifications.
+We have also onboarded a new employee to our SOC to assist with this matter and expedite the recovery of our update services to ensure all
+critical vulnerabilities are patched and servers are up to date. The CVE list below is top priority, and we must ensure that these are patched
+ASAP.
+Thank you in advance for your assistance. If you have any questions, please reach out to the mailing list above.
+
+
+
+CVE-2022-30190   Microsoft Windows Support Diagnostic Tool (MSDT) Remote Code Execution Vulnerability.
+CVE-2022-30138   Windows Print Spooler Elevation of Privilege Vulnerability.
+CVE-2022-30129   Visual Studio Code Remote Code Execution Vulnerability.
+CVE-2022-29130   Windows LDAP Remote Code Execution Vulnerability.
+CVE-2022-29110   Microsoft Excel Remote Code Execution Vulnerability
